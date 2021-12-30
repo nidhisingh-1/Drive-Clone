@@ -1,0 +1,44 @@
+#container {
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+}
+
+.folder {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+}
+
+button{
+    background-color: blueviolet;
+    border-radius: 5px;
+    color: white;
+    margin-left: 10px;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    height: 15px;
+    width: 15px;
+    margin-top: 2px;
+    display: flex;
+    float: right;    
+}
+
+div[purpose=name]{
+    text-align : bottom;
+    margin-top: 20px;
+    font-weight: 700;
+    font-family :'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
