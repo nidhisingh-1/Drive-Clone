@@ -5,7 +5,7 @@
 
     btn.addEventListener("click", function(){
         let fname = prompt("Enter a folder's name");
-        if(fname == null){
+        if(!fname){
             return;
         }
         
@@ -16,7 +16,24 @@
         divName.innerHTML = fname;
 
         divContainer.appendChild(divFolder);
-        if(fname != )
+
+        let spanEdit = divFolder.querySelector("span[action='edit']");
+        spanEdit.addEventListener("click", function(){
+            let changedName = prompt("Enter new name for " + fname + " folder");
+            divName.innerHTML = changedName;
+            fname = changedName;
+            if(!fname){
+                return;
+            }
+        })
+
+        let spanDelete = divFolder.querySelector("span[action='delete']");
+        spanDelete.addEventListener("click", function(){
+          let flag = confirm("Do you want to delete the folder? " + fname);
+          if(flag == true){
+              divContainer.removeChild(divFolder);
+          }
+        })
 
         
     })
