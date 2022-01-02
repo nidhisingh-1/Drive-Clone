@@ -2,22 +2,38 @@
     let btnAddFolder = document.querySelector("#btnAddFolder");
     let divContainer = document.querySelector("#divContainer");
     let pageTemplates = document.querySelector("#pageTemplates");
-    let breadCrumb = document.querySelector("divBreadCrumb");
+    let breadCrumb = document.querySelector("#divBreadCrumb");
     let folders = [];
     let fid = -1;
-    let cid = -1
+    let cfid = -1
+    let pid = -1;
 
     btnAddFolder.addEventListener("click", addFolder);
 
-    function viewFolder(){
-        alert("View Folder");
+    function viewFolder() {
+        let divFolder = this.parentNode;
+        let divName = divFolder.querySelector("[purpose ='name']");
+        cfid = parseInt(divFolder.getAttribute("fid"));
+
+        let aPathTemplate = pageTemplates.content.querySelector(".path");
+        let aPath = document.importNode(aPathTemplate, true);
+
+        aPath.innerHTML = divName.innerHTML;
+        breadCrumb.appendChild(aPath);
+
+        divContainer.innerHTML = "";
+        folders.filter(f => f.pid === cfid).forEach(f => {
+            addFolderHTML(f.name, f.id,f.pid);
+        })
+
+
     }
 
     function addFolder() {
         let fname = prompt("Enter folder's name");
         if (!!fname) {
-            let exists = folders.some(f => f.name == fname);
-            if (exists == false) {
+            let exists = folders.some(f => f.name === fname);
+            if (exists === false) {
                 fid++;
                 folders.push({
                     id: fid,
@@ -40,11 +56,11 @@
 
         let nfname = prompt("Enter new name for " + ofname);
         if (!!nfname) {
-            if (nfname != ofname) {
-                let exists = folders.some(f => f.name == nfname);
-                if (exists == false) {
+            if (nfname !== ofname) {
+                let exists = folders.some(f => f.name === nfname);
+                if (exists === false) {
                     // ram
-                    let folder = folders.find(f => f.name == ofname);
+                    let folder = folders.find(f => f.name === ofname);
                     folder.name = nfname;
 
                     // html
@@ -69,9 +85,9 @@
         let divName = divFolder.querySelector("[purpose='name']");
 
         let flag = confirm("Are you sure you want to delete " + divName.innerHTML + "?");
-        if (flag == true) {
+        if (flag === true) {
             // ram
-            let fidx = folders.findIndex(f => f.name == divName.innerHTML);
+            let fidx = folders.findIndex(f => f.name === divName.innerHTML);
             folders.splice(fidx, 1);
 
             // html
